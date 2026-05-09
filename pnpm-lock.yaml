@@ -94,6 +94,28 @@ importers:
         specifier: ^5.4.0
         version: 5.9.3
 
+  packages/evaluation:
+    dependencies:
+      '@linguaflow/comprehension':
+        specifier: workspace:*
+        version: link:../comprehension
+      '@linguaflow/runtime-core':
+        specifier: workspace:*
+        version: link:../runtime-core
+      '@linguaflow/telemetry':
+        specifier: workspace:*
+        version: link:../telemetry
+    devDependencies:
+      eslint:
+        specifier: ^8.57.0
+        version: 8.57.1
+      typescript:
+        specifier: ^5.4.0
+        version: 5.9.3
+      vitest:
+        specifier: ^1.6.0
+        version: 1.6.1(@types/node@20.19.40)(terser@5.47.1)
+
   packages/feature-space:
     devDependencies:
       eslint:
@@ -150,6 +172,31 @@ importers:
       typescript:
         specifier: ^5.4.0
         version: 5.9.3
+
+  packages/simulation:
+    dependencies:
+      '@linguaflow/comprehension':
+        specifier: workspace:*
+        version: link:../comprehension
+      '@linguaflow/feature-space':
+        specifier: workspace:*
+        version: link:../feature-space
+      '@linguaflow/runtime-core':
+        specifier: workspace:*
+        version: link:../runtime-core
+      '@linguaflow/telemetry':
+        specifier: workspace:*
+        version: link:../telemetry
+    devDependencies:
+      eslint:
+        specifier: ^8.57.0
+        version: 8.57.1
+      typescript:
+        specifier: ^5.4.0
+        version: 5.9.3
+      vitest:
+        specifier: ^1.6.0
+        version: 1.6.1(@types/node@20.19.40)(terser@5.47.1)
 
   packages/telemetry:
     devDependencies:

@@ -1,0 +1,6 @@
+export * from './types'
+export { TraceDatasetStore } from './trace-dataset'
+export { ReplaySimulator } from './replay-simulator'
+export type { SimulationResult, SimulationTimelinePoint } from './replay-simulator'
+export { RuntimeMetricsComputer } from './runtime-metrics'
+export { DriftDetector } from './drift-detector'

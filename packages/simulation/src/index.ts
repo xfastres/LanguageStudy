@@ -1,0 +1,5 @@
+export * from './types'
+export * from './profiles'
+export { SyntheticUserSimulator } from './simulator'
+export { DefectAnalyzer } from './defect-analyzer'
+export type { DefectSummary, CrossProfileAnalysis } from './defect-analyzer'
