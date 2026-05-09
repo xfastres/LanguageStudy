@@ -88,17 +88,20 @@
 
 - [ ] Task 12: 实现 Language Acquisition Engine 核心
   - [ ] SubTask 12.1: 实现语言画像 9 维度持续估计模型（听力理解力、词汇熟悉度、语法模式熟悉度、语速耐受度、口音适应力、语境依赖度、字幕依赖度、认知负荷、焦虑信号）
-  - [ ] SubTask 12.2: 实现 i+1 算法核心（寻找 80%-90% 理解率 + 10%-20% 未知信息的内容匹配）
-  - [ ] SubTask 12.3: 实现理解率推断引擎（基于行为信号：暂停频率、回放频率、字幕使用率、完成率、跳过率）
-  - [ ] SubTask 12.4: 实现动态降难调节（跳出率升高、回放暴增、高频暂停、字幕依赖增加时自动降难）
-  - [ ] SubTask 12.5: 实现动态升难调节（长时间无暂停、高频沉浸、高理解率时逐渐升难）
-  - [ ] SubTask 12.6: 实现内容向量嵌入与相似度计算
-  - [ ] SubTask 12.7: 实现兴趣加权推荐（协同过滤 + 内容特征 + i+1 难度匹配）
+  - [ ] SubTask 12.2: 实现 Language Acquisition State Machine（6 状态定义、状态特征、状态策略、迁移规则）
+  - [ ] SubTask 12.3: 实现状态迁移判定算法（基于 9 维度估计与行为信号自动判定 State 0-5）
+  - [ ] SubTask 12.4: 实现状态策略执行引擎（根据当前 State 应用对应系统策略）
+  - [ ] SubTask 12.5: 实现 i+1 算法核心（寻找 80%-90% 理解率 + 10%-20% 未知信息的内容匹配，考虑当前 State 策略约束）
+  - [ ] SubTask 12.6: 实现理解率推断引擎（基于行为信号：暂停频率、回放频率、字幕使用率、完成率、跳过率，推断结果用于 State 迁移判定）
+  - [ ] SubTask 12.7: 实现动态降难调节（跳出率升高、回放暴增、高频暂停、字幕依赖增加时自动降难）
+  - [ ] SubTask 12.8: 实现动态升难调节（长时间无暂停、高频沉浸、高理解率时逐渐升难）
+  - [ ] SubTask 12.9: 实现内容向量嵌入与相似度计算
+  - [ ] SubTask 12.10: 实现兴趣加权推荐（协同过滤 + 内容特征 + i+1 难度匹配 + State 策略约束）
 
 - [ ] Task 13: 实现学习路径引擎
-  - [ ] SubTask 13.1: 实现静默期判定逻辑（基于输入时长与理解率）
-  - [ ] SubTask 13.2: 实现输入/输出阶段切换逻辑
-  - [ ] SubTask 13.3: 实现每日学习路径推荐（今日最佳输入内容组合）
+  - [ ] SubTask 13.1: 实现静默期判定逻辑（State 0-3 为输入主导期，禁止主动引导输出）
+  - [ ] SubTask 13.2: 实现输入/输出阶段切换逻辑（State 4 为输出自然涌现期，仅提供低压力输出机会）
+  - [ ] SubTask 13.3: 实现每日学习路径推荐（基于当前 State 生成最优输入内容组合）
 
 ## Phase 6: AI Agent System（多智能体架构）
 
@@ -190,7 +193,7 @@
   - [ ] SubTask 26.4: 实现情景剧生成（AI 自动生成沉浸式短剧脚本）
   - [ ] SubTask 26.5: 实现生成内容自动进入 Content Pipeline 处理
 
-## Phase 13: 哲学护栏执行机制
+## Phase 13: 哲学护栏与运行时宪法执行机制
 
 - [ ] Task 27: 实现 Philosophical Guardrails 审查机制
   - [ ] SubTask 27.1: 实现 Guardrail 1 审查（可理解性输入增量检查）
@@ -201,22 +204,33 @@
   - [ ] SubTask 27.6: 实现护栏审查 API（新功能上线前必须调用，未通过则拦截）
   - [ ] SubTask 27.7: 实现 Non-Goals 运行时守卫（运行时检测系统是否退化，如出现题库化、教育化 UI、强制输出等行为则告警）
 
+- [ ] Task 28: 实现 Runtime Constitution 执行机制
+  - [ ] SubTask 28.1: 实现 Rule 1 执行（输入优先级高于活跃度：推荐系统不得为 DAU/点击/停留牺牲输入质量）
+  - [ ] SubTask 28.2: 实现 Rule 2 执行（推荐系统不得被商业化污染：付费内容不得强插推荐流，广告不得打断沉浸）
+  - [ ] SubTask 28.3: 实现 Rule 3 执行（默认相信用户：系统不得频繁测试验证用户，通过行为信号被动观察）
+  - [ ] SubTask 28.4: 实现 Rule 4 执行（练习伪装成内容消费：任何互动/复习/巩固必须看起来像娱乐内容）
+  - [ ] SubTask 28.5: 实现 Rule 5 执行（不让用户感觉差：禁止"你退步了"等负面反馈，强调长期积累）
+  - [ ] SubTask 28.6: 实现 Rule 6 执行（允许长期无输出用户：系统不得强制解锁口语、引导"快点说"）
+  - [ ] SubTask 28.7: 实现 Rule 7 执行（Agent 服从哲学护栏：所有 Agent 决策前必须通过 Guardrails，护栏优先级高于 Engagement/Revenue/Retention）
+  - [ ] SubTask 28.8: 实现 Rule 8 执行（优先保护沉浸状态：禁止高频弹窗/通知/UI 中断/强反馈，保护 Flow State）
+  - [ ] SubTask 28.9: 实现 Runtime Constitution 监控看板（实时监控 8 条规则的执行状态与违规告警）
+
 ## Phase 14: 数据埋点与分析
 
-- [ ] Task 28: 实现数据埋点方案
-  - [ ] SubTask 28.1: 设计埋点事件体系（内容消费、交互行为、学习行为、系统事件、Agent 事件）
-  - [ ] SubTask 28.2: 实现客户端埋点 SDK
-  - [ ] SubTask 28.3: 实现埋点数据采集与存储（ClickHouse）
-  - [ ] SubTask 28.4: 实现 North Star Metrics 分析看板（有效可理解输入时长为核心）
-  - [ ] SubTask 28.5: 实现 Anti-Metrics 监控看板（检测是否优化了错误指标）
+- [ ] Task 29: 实现数据埋点方案
+  - [ ] SubTask 29.1: 设计埋点事件体系（内容消费、交互行为、学习行为、系统事件、Agent 事件、State 迁移事件、Runtime Constitution 违规事件）
+  - [ ] SubTask 29.2: 实现客户端埋点 SDK
+  - [ ] SubTask 29.3: 实现埋点数据采集与存储（ClickHouse）
+  - [ ] SubTask 29.4: 实现 North Star Metrics 分析看板（有效可理解输入时长为核心）
+  - [ ] SubTask 29.5: 实现 Anti-Metrics 监控看板（检测是否优化了错误指标）
 
 ## Phase 15: 多语言扩展
 
-- [ ] Task 29: 实现日语与韩语支持
-  - [ ] SubTask 29.1: 实现日语内容分级适配（参考 JLPT 但重新抽象为输入理解等级）
-  - [ ] SubTask 29.2: 实现韩语内容分级适配（参考 TOPIK 但重新抽象为输入理解等级）
-  - [ ] SubTask 29.3: 实现日语/韩语字幕与释义系统
-  - [ ] SubTask 29.4: 实现语言扩展配置化方案（新语言无需核心代码改动）
+- [ ] Task 30: 实现日语与韩语支持
+  - [ ] SubTask 30.1: 实现日语内容分级适配（参考 JLPT 但重新抽象为输入理解等级）
+  - [ ] SubTask 30.2: 实现韩语内容分级适配（参考 TOPIK 但重新抽象为输入理解等级）
+  - [ ] SubTask 30.3: 实现日语/韩语字幕与释义系统
+  - [ ] SubTask 30.4: 实现语言扩展配置化方案（新语言无需核心代码改动）
 
 # Task Dependencies
 
@@ -246,8 +260,9 @@
 - [Task 25] depends on [Task 13, Task 5, Task 17]
 - [Task 26] depends on [Task 8, Task 12]
 - [Task 27] depends on [Task 3]
-- [Task 28] depends on [Task 2, Task 3]
-- [Task 29] depends on [Task 6, Task 8, Task 9]
+- [Task 28] depends on [Task 27, Task 14]
+- [Task 29] depends on [Task 2, Task 3, Task 28]
+- [Task 30] depends on [Task 6, Task 8, Task 9]
 
 # Parallelizable Work
 
