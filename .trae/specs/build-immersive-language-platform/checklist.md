@@ -3,7 +3,7 @@
 ## 基础设施
 
 - [ ] 项目 monorepo 结构已搭建，前端/后端/共享包目录清晰
-- [ ] Docker Compose 本地开发环境可正常启动（PostgreSQL、Redis、向量数据库、对象存储）
+- [ ] Docker Compose 本地开发环境可正常启动（PostgreSQL、Redis、向量数据库、对象存储、图数据库）
 - [ ] CI/CD 流水线配置完成且可运行
 
 ## 前端框架
@@ -18,6 +18,15 @@
 - [ ] API Gateway 可正常路由与鉴权
 - [ ] 用户服务、内容服务、推荐服务、AI 服务骨架可启动
 - [ ] 服务间通信链路通畅
+
+## Immersion Runtime（Layer 0）
+
+- [ ] Flow State 检测正常工作（基于连续输入时长、交互节奏稳定性、内容完成率）
+- [ ] 中断优先级管理正常（低优先级中断沉浸期间进入静默队列）
+- [ ] 静默队列正常工作（沉浸期间非关键通知排队，沉浸结束后统一展示）
+- [ ] 无缝过渡正常（内容结束前预加载下一内容，零等待过渡）
+- [ ] 认知切换守卫正常（需用户主动决策的 UI 变化在沉浸期间延迟执行）
+- [ ] 沉浸恢复正常（中断后提供快速恢复路径）
 
 ## 用户系统
 
@@ -102,6 +111,22 @@
 - [ ] 兴趣加权推荐正常工作（协同过滤 + 内容特征 + i+1 难度匹配 + State 策略约束）
 - [ ] 学习路径引擎可基于当前 State 生成每日推荐内容组合
 
+## Acquisition Memory Graph（Layer 1）
+
+- [ ] 图谱数据模型已实现（6 种节点类型：词汇、语法模式、语境、声音、情感、内容）
+- [ ] 图谱边类型已实现（5 种：出现关系、上下文关联、声音关联、情感关联、习得路径）
+- [ ] 图谱存储正常（图数据库）
+- [ ] 图谱自动构建正常（用户消费内容时自动将节点与边加入图谱）
+- [ ] 习得状态追踪正常（每个节点维护：暴露次数、上下文多样性、时间衰减、习得置信度）
+- [ ] 图谱驱动推荐正常（强化路径、扩展路径、语境丰富化）
+
+## Emotional State Engine（Layer 1）
+
+- [ ] 情绪维度估计正常（焦虑水平、专注度、愉悦度、疲劳度、挫败感）
+- [ ] 情绪信号来源处理正常（行为信号→焦虑/挫败、交互模式→疲劳/无聊、完成模式→愉悦/专注、时间模式→Flow State）
+- [ ] 情绪响应策略正常（焦虑→降难、专注→延长沉浸、愉悦→维持、疲劳→建议休息、挫败→立即降难）
+- [ ] 情绪信号共享正常（情绪状态作为所有 Agent 和推荐引擎的输入）
+
 ## AI Agent System
 
 - [ ] Language Companion Agent 可正常陪伴用户（理解阶段、调节焦虑、推荐输入、引导沉浸）
@@ -185,9 +210,53 @@
 - [ ] Rule 8 执行正常（优先保护沉浸状态：无高频弹窗/通知/UI 中断/强反馈，保护 Flow State）
 - [ ] Runtime Constitution 监控看板可实时监控 8 条规则执行状态与违规告警
 
+## 推荐系统防 DAU 污染架构
+
+- [ ] 推荐目标函数正确（唯一优化目标：最大化有效可理解输入时长）
+- [ ] 推荐评分公式正确（i+1 匹配度 + 兴趣匹配度 + 习得价值 + 情绪适配度，i+1 权重最高）
+- [ ] DAU 信号隔离正常（DAU/日启动次数不作为推荐特征输入）
+- [ ] 商业化信号隔离正常（付费内容在推荐流中不获得额外权重）
+- [ ] 焦虑驱动信号隔离正常（不使用焦虑驱动信号优化推荐）
+- [ ] 推荐审计正常（定期审计推荐结果是否偏离 i+1 目标）
+
+## System Architecture Layers（系统分层）
+
+- [ ] Layer 0（Immersion Runtime）作为最底层运行时环境正常工作
+- [ ] Layer 1（Cognitive Engines）包含 LAE + State Machine + Emotional State Engine + Acquisition Memory Graph
+- [ ] Layer 2（AI Agent System）基于 Layer 1 认知状态做出决策
+- [ ] Layer 3（Content System）内容供应链与消费体验正常
+- [ ] Layer 4（Experience Layer）用户界面与交互正常
+- [ ] Layer 5（Guardrails）横跨所有层的保护机制正常
+- [ ] 层间规则遵守：Layer N 不绕过 Layer N-1 直接访问更底层
+- [ ] Layer 5 护栏审查覆盖所有层行为
+- [ ] Layer 0 沉浸运行时优先级最高，上层行为不破坏沉浸状态
+- [ ] Layer 1 认知引擎输出是 Layer 2 智能体的唯一决策依据
+
+## MVP Minimum Viable Loop（MVP 最小闭环）
+
+- [ ] MVP 最小闭环路径完整：注册→画像→首次沉浸→行为信号采集→画像更新→推荐调整→自然理解验证
+- [ ] 邮箱注册功能正常
+- [ ] 英语内容库 Level 0-2 至少 50 条内容
+- [ ] 视频播放器核心功能正常（播放/暂停/字幕/语速调节）
+- [ ] Language Acquisition Engine 基础版正常（i+1 匹配 + 行为信号推断）
+- [ ] State Machine State 0-2 正常
+- [ ] Acquisition Memory Graph 基础版正常（词汇暴露追踪）
+- [ ] Emotional State Engine 基础版正常（焦虑/专注度检测）
+- [ ] Immersion Runtime 基础版正常（沉浸检测 + 静默队列）
+- [ ] Runtime Constitution Rule 1-8 基础执行正常
+- [ ] North Star Metrics 基础追踪正常（有效可理解输入时长）
+
+## Technical Moats（技术壁垒验证）
+
+- [ ] Acquisition Memory Graph 网络效应可验证（用户使用时间增长，推荐精准度提升）
+- [ ] State Machine + i+1 推荐闭环可验证（状态驱动推荐→信号更新状态→新推荐）
+- [ ] Immersion Runtime 沉浸数据可采集（Flow State 进入条件、中断恢复模式）
+- [ ] Emotional State Engine 情绪模型可训练（真实用户语言习得情绪反应数据积累）
+- [ ] Guardrails 防退化系统可验证（竞品退化场景下 LinguaFlow 保持不退化）
+
 ## 数据埋点
 
-- [ ] 埋点事件体系设计完整（包含 Agent 事件、State 迁移事件、Runtime Constitution 违规事件）
+- [ ] 埋点事件体系设计完整（包含 Agent 事件、State 迁移事件、Runtime Constitution 违规事件、Immersion 事件、情绪事件）
 - [ ] 客户端埋点 SDK 可正常采集数据
 - [ ] 埋点数据可正常存储至 ClickHouse
 - [ ] North Star Metrics 分析看板可查看核心指标
