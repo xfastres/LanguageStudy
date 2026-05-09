@@ -16,7 +16,11 @@
     "paths": {
       "@linguaflow/shared": ["./packages/shared/src"],
       "@linguaflow/database": ["./packages/database/src"],
-      "@linguaflow/logger": ["./packages/logger/src"]
+      "@linguaflow/logger": ["./packages/logger/src"],
+      "@linguaflow/telemetry": ["./packages/telemetry/src"],
+      "@linguaflow/runtime-core": ["./packages/runtime-core/src"],
+      "@linguaflow/feature-space": ["./packages/feature-space/src"],
+      "@linguaflow/comprehension": ["./packages/comprehension/src"]
     }
   },
   "exclude": ["node_modules", "dist", ".next"]
