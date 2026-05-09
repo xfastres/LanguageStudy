@@ -19,7 +19,11 @@
     "framer-motion": "^11.2.0",
     "@linguaflow/shared": "workspace:*",
     "@linguaflow/database": "workspace:*",
-    "@linguaflow/logger": "workspace:*"
+    "@linguaflow/logger": "workspace:*",
+    "@linguaflow/telemetry": "workspace:*",
+    "@linguaflow/runtime-core": "workspace:*",
+    "@linguaflow/feature-space": "workspace:*",
+    "@linguaflow/comprehension": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.4.0",

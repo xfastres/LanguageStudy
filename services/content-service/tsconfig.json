@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@linguaflow/feature-space": ["../feature-space/src"],
+      "@linguaflow/shared": ["../shared/src"],
+      "@linguaflow/logger": ["../logger/src"]
+    }
+  },
+  "include": ["src"]
+}
