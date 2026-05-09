@@ -1,0 +1,26 @@
+{
+  "name": "@linguaflow/api-gateway",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/main.ts",
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "fastify": "^4.27.0",
+    "@fastify/jwt": "^8.0.0",
+    "@fastify/cors": "^9.0.0",
+    "@fastify/rate-limit": "^9.1.0",
+    "@linguaflow/shared": "workspace:*",
+    "@linguaflow/logger": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.12.0",
+    "ts-node-dev": "^2.0.0",
+    "eslint": "^8.57.0"
+  }
+}
