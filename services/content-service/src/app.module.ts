@@ -8,9 +8,9 @@ import { SeedModule } from './seed/seed.module'
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
-      type: 'postgres',
+      type: 'mysql',
       host: process.env.DB_HOST || 'localhost',
-      port: parseInt(process.env.DB_PORT || '5432', 10),
+      port: parseInt(process.env.DB_PORT || '3306', 10),
       username: process.env.DB_USER || 'linguaflow',
       password: process.env.DB_PASSWORD || 'linguaflow_dev',
       database: process.env.DB_NAME || 'linguaflow',

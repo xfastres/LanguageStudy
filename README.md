@@ -155,9 +155,9 @@ const adjustment = computeDifficultyAdjustment(comprehension)
 ## Tech Stack
 
 - **Frontend**: Next.js 14, React 18, Tailwind CSS, Zustand, Framer Motion
-- **Backend**: NestJS, Fastify, TypeORM, PostgreSQL
+- **Backend**: NestJS, Fastify, TypeORM, MySQL
 - **Runtime**: TypeScript (platform-agnostic), Vitest
-- **Infrastructure**: Docker Compose, PostgreSQL 16, Redis 7, Qdrant, MinIO
+- **Infrastructure**: Docker Compose, MySQL 8, Redis 7, Qdrant, MinIO
 
 ## License
 
