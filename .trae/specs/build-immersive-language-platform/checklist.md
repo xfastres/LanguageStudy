@@ -1,81 +1,109 @@
 # Checklist
 
-## 基础设施
+## MVP 核心闭环（生死验证）
 
-- [ ] 项目 monorepo 结构已搭建，前端/后端/共享包目录清晰
-- [ ] Docker Compose 本地开发环境可正常启动（PostgreSQL、Redis、向量数据库、对象存储、图数据库）
-- [ ] CI/CD 流水线配置完成且可运行
-
-## 前端框架
-
-- [ ] Next.js 项目可启动，App Router 配置正确
-- [ ] UI 组件库基础搭建完成，风格极简、低焦虑配色
-- [ ] 全局布局实现沉浸式导航与内容优先设计
-- [ ] 国际化方案配置完成，支持中/英/日/韩界面语言
-
-## 后端微服务
-
-- [ ] API Gateway 可正常路由与鉴权
-- [ ] 用户服务、内容服务、推荐服务、AI 服务骨架可启动
-- [ ] 服务间通信链路通畅
-
-## Immersion Runtime（Layer 0）
-
-- [ ] Flow State 检测正常工作（基于连续输入时长、交互节奏稳定性、内容完成率）
-- [ ] 中断优先级管理正常（低优先级中断沉浸期间进入静默队列）
-- [ ] 静默队列正常工作（沉浸期间非关键通知排队，沉浸结束后统一展示）
-- [ ] 无缝过渡正常（内容结束前预加载下一内容，零等待过渡）
-- [ ] 认知切换守卫正常（需用户主动决策的 UI 变化在沉浸期间延迟执行）
-- [ ] 沉浸恢复正常（中断后提供快速恢复路径）
-
-## 用户系统
-
-- [ ] 邮箱注册登录功能正常，JWT 鉴权有效
-- [ ] OAuth 登录（Google/Apple/GitHub）可正常使用
-- [ ] 用户资料管理可正常编辑与保存
-- [ ] 语言画像数据模型已实现（9 维度），初始画像构建流程完整
-- [ ] 多语言学习档案可独立管理
-
-## 内容系统
-
-- [ ] 内容数据模型已实现，Level 0-5 分级逻辑正确
-- [ ] 内容来源类型支持 PGC/UGC/AI-native 标记
-- [ ] 内容管理后台可上传、分级、发布内容
-- [ ] 视频转码与自适应码率正常工作
-- [ ] 自动字幕生成（Whisper）可正常产出
-- [ ] 语速调节（不变调变速）功能正常
-- [ ] 内容向量化嵌入可正常生成与存储
-
-## Content Pipeline
-
-- [ ] ASR 转录管线正常工作（语音转文字）
-- [ ] 多语言对齐正常（字幕与原文时间轴对齐）
-- [ ] i+1 Level 分析自动评估正确
-- [ ] 高频词统计功能正常
-- [ ] 语法模式提取功能正常
-- [ ] 可理解性评分算法输出合理
-- [ ] Embedding 向量化与推荐索引建立正常
-
-## 内容消费体验
-
+- [ ] TikTok-like 内容流正常（全屏视频卡片、上下滑动、无限滚动）
+- [ ] 内容分级 Level 0-2 逻辑正确
+- [ ] 内容管理后台可上传、标注 Level、发布视频
+- [ ] 英语种子内容至少 50 条（Level 0-2）
 - [ ] 视频播放器核心功能正常（播放/暂停/进度/全屏）
-- [ ] 单语字幕显示与切换正常
-- [ ] 悬停释义功能正常（词语悬停弹出解释）
+- [ ] 单语字幕显示正常
 - [ ] 语速调节控件可用
-- [ ] 智能暂停与重复播放功能正常
-- [ ] 输入时长记录准确（仅播放时计时）
-- [ ] 音频播放器支持后台播放与锁屏控制
-- [ ] 听力流模式可连续播放同等级内容
-- [ ] 内容信息流首页无限滚动正常
-- [ ] 内容分类筛选功能可用
+- [ ] 行为信号采集正常（pause/replay/completion/subtitle usage）
+- [ ] 简单画像正常（兴趣标签 + 自评理解力）
+- [ ] i+1 Engine MVP 正常（基于行为信号动态调节难度）
+- [ ] 内容推荐 API 正常（基于画像 + i+1 匹配返回下一内容）
+- [ ] 输入时长记录准确（仅播放时计时，暂停不计时）
+- [ ] 有效输入时长统计看板正常
+- [ ] **生死验证：用户能否连续沉浸 1 小时以上**
+
+## State Machine State 0-2
+
+- [ ] State 0-2 定义与特征正确
+- [ ] 基于行为信号的状态迁移判定正常
+- [ ] 状态策略执行正确（State 0→超慢速+强视觉，State 1→高频场景，State 2→扩大主题）
+
+## Acquisition Memory Graph 基础版
+
+- [ ] 图谱数据模型基础版正常（词汇节点 + 出现关系边）
+- [ ] 图谱存储正常（图数据库）
+- [ ] 词汇暴露追踪正常（消费内容时自动写入图谱）
+- [ ] 图谱驱动推荐基础版正常（强化路径：已暴露未习得词汇优先出现）
+
+## Emotional State Engine 基础版
+
+- [ ] 焦虑水平与专注度估计正常（基于行为信号）
+- [ ] 情绪响应策略基础版正常（焦虑→降难、专注→延长沉浸）
+
+## Immersion Runtime 基础版
+
+- [ ] Flow State 检测正常（基于连续输入时长与交互节奏）
+- [ ] 静默队列正常（沉浸期间非关键通知排队）
+- [ ] 无缝过渡正常（内容结束前预加载下一内容）
+
+## World Simulation Layer
+
+- [ ] World 数据模型已实现（世界设定、NPC、事件、广播、消息）
+- [ ] World 渲染引擎基础版正常（场景切换、NPC 对话、环境音）
+- [ ] World 内语言输入自然出现机制正常
+- [ ] World 与 State Machine 难度联动正常
+- [ ] 多 World 支持正常（Tokyo Apartment / Cyberpunk Seoul / Small Town America 等）
+- [ ] World 内 NPC 系统与事件系统正常
+- [ ] World 内叙事线管理正常
+- [ ] World 与所有 Cognitive Engines 深度集成正常
+
+## Persistent Companion System
+
+- [ ] AI Companion 基础对话能力正常（LLM 驱动，i+1 表达复杂度）
+- [ ] Companion 记忆正常（记住用户信息与互动历史）
+- [ ] Companion 与 World 集成正常（Companion 生活在 World 中）
+- [ ] Companion 情感记忆正常（基于 Emotional Memory Graph）
+- [ ] Companion 成长系统正常（随用户 State 演化）
+- [ ] Companion 多角色支持正常
+
+## Language Acquisition Engine 完整版
+
+- [ ] 语言画像 9 维度持续估计模型正常
+- [ ] State Machine State 0-5 完整
+- [ ] 状态迁移只能向前，由行为信号自动判定
+- [ ] 状态可停滞，系统不因此制造焦虑
+- [ ] i+1 算法完整版正确（考虑 State 约束 + Memory Graph + 情绪适配度 + 叙事连续性）
+- [ ] 理解率推断引擎完整版正常
+- [ ] 动态降难/升难调节完整版正常
+
+## Emotional Memory Graph
+
+- [ ] 情绪记忆图谱数据模型正常（情绪节点 + 情绪边 + 情绪强度 + 情绪衰减）
+- [ ] 情绪编码正常（语言输入与情绪状态绑定记录）
+- [ ] 情绪驱动推荐正常（强化情绪编码、利用情绪锚点扩展习得）
+
+## Narrative Continuity Engine
+
+- [ ] Narrative Graph 正常（叙事节点 + 叙事边 + 叙事张力 + 叙事惯性）
+- [ ] Narrative Continuity Score 正常
+- [ ] 叙事驱动推荐正常（高潮维持、悬念预加载、低谷引入新线）
+
+## Identity Transition Engine
+
+- [ ] 身份迁移信号追踪正常（目标语言思考/人格/偏好/情绪反应）
+- [ ] Identity States 正确（Observer → Visitor → Resident → Native）
+- [ ] 身份驱动系统策略正确
+
+## Ambient Immersion System
+
+- [ ] 耳机自动输入流正常
+- [ ] 桌面漂浮字幕正常
+- [ ] 锁屏界面目标语言内容正常
+- [ ] 睡眠前低强度输入正常
+- [ ] Ambient 与 State Machine 难度联动正常
 
 ## Non-Goals 守卫
 
-- [ ] 系统无题库化功能（无大量选择题、高频考试、题海模式）
-- [ ] 系统无教育化 UI（无课堂感、PPT 风格、教学章节树、"下一课"按钮）
-- [ ] 系统无强制输出（无初期口语打卡、开口 KPI、高频发音评分、红色纠错）
-- [ ] 系统无显式语法教学主导（无长篇语法课、复杂术语教学、规则记忆要求）
-- [ ] 系统无焦虑机制（无签到惩罚、guilt trip、"你今天落后了"、streak 压迫、排名竞争）
+- [ ] 系统无题库化功能
+- [ ] 系统无教育化 UI
+- [ ] 系统无强制输出
+- [ ] 系统无显式语法教学主导
+- [ ] 系统无焦虑机制
 
 ## 输入优先与静默期
 
@@ -83,188 +111,125 @@
 - [ ] 静默期用户不被强制要求口语/对话/语法输出
 - [ ] 系统不以口语输出作为核心 KPI
 - [ ] 系统不以做题数量作为成长指标
-- [ ] 静默期判定逻辑基于输入时长与理解率
 
 ## 低焦虑设计
 
 - [ ] 系统无红色错误提示
 - [ ] 系统无高频纠错机制
 - [ ] 反馈均为鼓励式、渐进式
-- [ ] UI 无传统 LMS 风格、无题库感、无复杂导航
+- [ ] UI 无传统 LMS 风格
 - [ ] 界面呈现极简、沉浸、内容优先风格
-
-## Language Acquisition Engine
-
-- [ ] 语言画像 9 维度持续估计模型正常工作（听力理解力、词汇熟悉度、语法模式熟悉度、语速耐受度、口音适应力、语境依赖度、字幕依赖度、认知负荷、焦虑信号）
-- [ ] Language Acquisition State Machine 6 状态定义完整（State 0-5：Language Shock → Pattern Recognition → Comprehension Expansion → Internal Language Formation → Natural Output Emergence → Native-like Flow）
-- [ ] 状态迁移判定算法基于 9 维度与行为信号自动判定 State 0-5
-- [ ] 状态策略执行引擎根据当前 State 应用对应系统策略
-- [ ] 状态迁移只能向前（State N → State N+1），不允许跳级
-- [ ] 状态可停滞，系统不因此制造焦虑
-- [ ] State 0-3 为输入主导期，系统禁止主动引导输出
-- [ ] State 4 为输出自然涌现期，系统仅提供低压力输出机会
-- [ ] i+1 算法核心正确（匹配 80%-90% 理解率 + 10%-20% 未知信息的内容，考虑当前 State 策略约束）
-- [ ] 理解率推断引擎基于行为信号工作（暂停频率、回放频率、字幕使用率、完成率、跳过率，推断结果用于 State 迁移判定）
-- [ ] 动态降难调节正确（跳出率升高、回放暴增、高频暂停、字幕依赖增加时自动降难）
-- [ ] 动态升难调节正确（长时间无暂停、高频沉浸、高理解率时逐渐升难）
-- [ ] 内容向量嵌入与相似度计算正常
-- [ ] 兴趣加权推荐正常工作（协同过滤 + 内容特征 + i+1 难度匹配 + State 策略约束）
-- [ ] 学习路径引擎可基于当前 State 生成每日推荐内容组合
-
-## Acquisition Memory Graph（Layer 1）
-
-- [ ] 图谱数据模型已实现（6 种节点类型：词汇、语法模式、语境、声音、情感、内容）
-- [ ] 图谱边类型已实现（5 种：出现关系、上下文关联、声音关联、情感关联、习得路径）
-- [ ] 图谱存储正常（图数据库）
-- [ ] 图谱自动构建正常（用户消费内容时自动将节点与边加入图谱）
-- [ ] 习得状态追踪正常（每个节点维护：暴露次数、上下文多样性、时间衰减、习得置信度）
-- [ ] 图谱驱动推荐正常（强化路径、扩展路径、语境丰富化）
-
-## Emotional State Engine（Layer 1）
-
-- [ ] 情绪维度估计正常（焦虑水平、专注度、愉悦度、疲劳度、挫败感）
-- [ ] 情绪信号来源处理正常（行为信号→焦虑/挫败、交互模式→疲劳/无聊、完成模式→愉悦/专注、时间模式→Flow State）
-- [ ] 情绪响应策略正常（焦虑→降难、专注→延长沉浸、愉悦→维持、疲劳→建议休息、挫败→立即降难）
-- [ ] 情绪信号共享正常（情绪状态作为所有 Agent 和推荐引擎的输入）
 
 ## AI Agent System
 
-- [ ] Language Companion Agent 可正常陪伴用户（理解阶段、调节焦虑、推荐输入、引导沉浸）
-- [ ] Comprehension Analyzer Agent 可实时评估理解率、认知负荷、i+1 匹配度
-- [ ] Content Adaptation Agent 可动态降难、改写、重构语速、增加上下文提示
-- [ ] Silent Period Guardian Agent 可检测并阻止过早输出、焦虑信号、系统误伤
 - [ ] Agent 事件总线通信正常
-- [ ] Agent 间共享语言画像状态同步正常
-- [ ] Language Companion Agent 作为总协调者正常工作
+- [ ] Agent 共享状态正常（语言画像 + 情绪状态 + 身份状态）
+- [ ] Agent 决策护栏正常（所有 Agent 决策前通过 Philosophical Guardrails）
+- [ ] Language Companion Agent 正常
+- [ ] Comprehension Analyzer Agent 正常
+- [ ] Content Adaptation Agent 正常
+- [ ] Silent Period Guardian Agent 正常
 
-## 习得系统
+## 推荐系统防 DAU 污染架构
 
-- [ ] 词汇暴露追踪可记录用户在输入中遇到的词
-- [ ] 高频输入自动强化可在后续内容中增加已遇词出现频率
-- [ ] 语境记忆卡片包含词语 + 来源上下文 + 图片 + 声音
-- [ ] 词汇习得状态流转正确（未见 → 暴露 → 熟悉 → 习得）
-- [ ] 语法结构识别可从字幕/文本中提取语法模式
-- [ ] 语法提醒为轻量规律提示，非术语教学
-
-## North Star Metrics
-
-- [ ] 有效可理解输入时长统计准确（Primary Metric：理解 80%+ 内容的输入时间）
-- [ ] 自然理解增长率追踪正确（无字幕情况下理解提升速度）
-- [ ] 沉浸连续性追踪正确（长期低压力输入习惯，非 streak 绑架）
-- [ ] 输入覆盖广度统计可用（真实语言场景数量与多样性）
-- [ ] 输出自然出现率追踪正确（无强迫情况下自然表达频率）
-- [ ] Anti-Metrics 监控正常（系统未优化做题量、背词量、完课率等错误指标）
-- [ ] 输入小时树可视化正常
-- [ ] 理解力成长曲线可视化正常
-- [ ] 听力等级进化图可视化正常
-
-## 成就激励
-
-- [ ] 成就数据模型已实现
-- [ ] 里程碑成就触发逻辑正确
-- [ ] 理解力成就触发逻辑正确
-- [ ] 成就通知为低焦虑、鼓励式设计
-- [ ] 成就系统无 streak 压迫机制
-
-## 社区沉浸
-
-- [ ] 沉浸房间可多人同步消费内容
-- [ ] 输入挑战活动可创建与参与
-- [ ] 成长分享功能可用
-- [ ] 语言陪伴匹配功能可用
-
-## 输出系统
-
-- [ ] AI 对话 Agent 可正常对话
-- [ ] 输出阶段仅在输入积累达标后解锁（由 Silent Period Guardian 守护）
-- [ ] 纠错为极简自然重述，无红色错误提示
-- [ ] 语音识别与 Shadowing 跟读反馈正常
-
-## AI-native 内容生成
-
-- [ ] 内容空缺检测可识别某等级/某兴趣领域内容不足
-- [ ] i+1 故事生成功能正常
-- [ ] i+1 对话生成功能正常
-- [ ] 情景剧生成功能正常
-- [ ] 生成内容自动进入 Content Pipeline 处理
+- [ ] 推荐目标函数正确（唯一优化：最大化有效可理解输入时长）
+- [ ] 推荐评分公式正确（i+1 匹配度 + 兴趣匹配度 + 习得价值 + 情绪适配度 + 叙事连续性，i+1 权重最高）
+- [ ] DAU 信号隔离正常
+- [ ] 商业化信号隔离正常
+- [ ] 焦虑驱动信号隔离正常
+- [ ] 推荐审计正常
 
 ## Philosophical Guardrails
 
-- [ ] Guardrail 1 审查正常（可理解性输入增量检查）
-- [ ] Guardrail 2 审查正常（焦虑降低检查）
-- [ ] Guardrail 3 审查正常（母语习得自然路径检查）
-- [ ] Guardrail 4 审查正常（传统教育异化防护检查）
-- [ ] Guardrail 5 审查正常（长期沉浸体验强化检查）
+- [ ] Guardrail 1-5 审查正常
 - [ ] 护栏审查 API 可正常拦截未通过审查的功能
 - [ ] Non-Goals 运行时守卫可检测系统退化并告警
 
 ## Runtime Constitution
 
-- [ ] Rule 1 执行正常（输入优先级高于活跃度：推荐系统不为 DAU/点击/停留牺牲输入质量）
-- [ ] Rule 2 执行正常（推荐系统不被商业化污染：付费内容不强插推荐流，广告不打断沉浸）
-- [ ] Rule 3 执行正常（默认相信用户：系统不频繁测试验证用户，通过行为信号被动观察）
-- [ ] Rule 4 执行正常（练习伪装成内容消费：任何互动/复习/巩固看起来像娱乐内容而非作业/测试）
-- [ ] Rule 5 执行正常（不让用户感觉差：无"你退步了"等负面反馈，强调长期积累与自然成长）
-- [ ] Rule 6 执行正常（允许长期无输出用户：系统不强制解锁口语、不引导"快点说"）
-- [ ] Rule 7 执行正常（Agent 服从哲学护栏：所有 Agent 决策前通过 Guardrails，护栏优先级高于 Engagement/Revenue/Retention）
-- [ ] Rule 8 执行正常（优先保护沉浸状态：无高频弹窗/通知/UI 中断/强反馈，保护 Flow State）
-- [ ] Runtime Constitution 监控看板可实时监控 8 条规则执行状态与违规告警
+- [ ] Rule 1-8 执行正常
+- [ ] Runtime Constitution 监控看板可实时监控执行状态与违规告警
 
-## 推荐系统防 DAU 污染架构
+## Constitutional AI for Product Decisions
 
-- [ ] 推荐目标函数正确（唯一优化目标：最大化有效可理解输入时长）
-- [ ] 推荐评分公式正确（i+1 匹配度 + 兴趣匹配度 + 习得价值 + 情绪适配度，i+1 权重最高）
-- [ ] DAU 信号隔离正常（DAU/日启动次数不作为推荐特征输入）
-- [ ] 商业化信号隔离正常（付费内容在推荐流中不获得额外权重）
-- [ ] 焦虑驱动信号隔离正常（不使用焦虑驱动信号优化推荐）
-- [ ] 推荐审计正常（定期审计推荐结果是否偏离 i+1 目标）
+- [ ] Guardian AI 审查引擎正常（基于 Guardrails + Constitution + Non-Goals）
+- [ ] 提案提交→审查→通过/拦截流程正常
+- [ ] 上线后持续监控与退化信号检测正常
 
-## System Architecture Layers（系统分层）
+## Content Pipeline
 
-- [ ] Layer 0（Immersion Runtime）作为最底层运行时环境正常工作
-- [ ] Layer 1（Cognitive Engines）包含 LAE + State Machine + Emotional State Engine + Acquisition Memory Graph
-- [ ] Layer 2（AI Agent System）基于 Layer 1 认知状态做出决策
-- [ ] Layer 3（Content System）内容供应链与消费体验正常
-- [ ] Layer 4（Experience Layer）用户界面与交互正常
-- [ ] Layer 5（Guardrails）横跨所有层的保护机制正常
-- [ ] 层间规则遵守：Layer N 不绕过 Layer N-1 直接访问更底层
-- [ ] Layer 5 护栏审查覆盖所有层行为
-- [ ] Layer 0 沉浸运行时优先级最高，上层行为不破坏沉浸状态
-- [ ] Layer 1 认知引擎输出是 Layer 2 智能体的唯一决策依据
+- [ ] ASR 转录正常
+- [ ] 多语言对齐正常
+- [ ] i+1 Level 自动评估正确
+- [ ] 高频词统计与语法模式提取正常
+- [ ] 可理解性评分合理
+- [ ] Embedding 向量化与推荐索引正常
+- [ ] 视频转码与自适应码率正常
+- [ ] 语速调节（不变调变速）正常
 
-## MVP Minimum Viable Loop（MVP 最小闭环）
+## North Star Metrics
 
-- [ ] MVP 最小闭环路径完整：注册→画像→首次沉浸→行为信号采集→画像更新→推荐调整→自然理解验证
-- [ ] 邮箱注册功能正常
-- [ ] 英语内容库 Level 0-2 至少 50 条内容
-- [ ] 视频播放器核心功能正常（播放/暂停/字幕/语速调节）
-- [ ] Language Acquisition Engine 基础版正常（i+1 匹配 + 行为信号推断）
-- [ ] State Machine State 0-2 正常
-- [ ] Acquisition Memory Graph 基础版正常（词汇暴露追踪）
-- [ ] Emotional State Engine 基础版正常（焦虑/专注度检测）
-- [ ] Immersion Runtime 基础版正常（沉浸检测 + 静默队列）
-- [ ] Runtime Constitution Rule 1-8 基础执行正常
-- [ ] North Star Metrics 基础追踪正常（有效可理解输入时长）
+- [ ] 有效可理解输入时长统计准确（Primary Metric）
+- [ ] 自然理解增长率追踪正确
+- [ ] 沉浸连续性追踪正确
+- [ ] 输入覆盖广度统计可用
+- [ ] 输出自然出现率追踪正确
+- [ ] Anti-Metrics 监控正常
+- [ ] 可视化成长系统正常
 
-## Technical Moats（技术壁垒验证）
+## 习得系统
 
-- [ ] Acquisition Memory Graph 网络效应可验证（用户使用时间增长，推荐精准度提升）
-- [ ] State Machine + i+1 推荐闭环可验证（状态驱动推荐→信号更新状态→新推荐）
-- [ ] Immersion Runtime 沉浸数据可采集（Flow State 进入条件、中断恢复模式）
-- [ ] Emotional State Engine 情绪模型可训练（真实用户语言习得情绪反应数据积累）
-- [ ] Guardrails 防退化系统可验证（竞品退化场景下 LinguaFlow 保持不退化）
+- [ ] 词汇暴露追踪正常
+- [ ] 高频输入自动强化正常
+- [ ] 语境记忆卡片正常
+- [ ] 词汇习得状态流转正确
+- [ ] 语法结构识别正常
+- [ ] 语法提醒为轻量规律提示
 
-## 数据埋点
+## 社区与输出
 
-- [ ] 埋点事件体系设计完整（包含 Agent 事件、State 迁移事件、Runtime Constitution 违规事件、Immersion 事件、情绪事件）
-- [ ] 客户端埋点 SDK 可正常采集数据
-- [ ] 埋点数据可正常存储至 ClickHouse
-- [ ] North Star Metrics 分析看板可查看核心指标
-- [ ] Anti-Metrics 监控看板可检测错误指标优化
+- [ ] 沉浸房间正常
+- [ ] 输入挑战与成长分享正常
+- [ ] AI 对话 Agent 正常
+- [ ] 输出阶段解锁逻辑正确（Silent Period Guardian 守护）
+- [ ] 极简纠错正常（无红色错误提示）
 
 ## 多语言扩展
 
-- [ ] 日语内容分级适配完成
-- [ ] 韩语内容分级适配完成
-- [ ] 日语/韩语字幕与释义系统正常
-- [ ] 新语言可通过配置扩展，无需核心代码改动
+- [ ] 日语/韩语内容分级适配完成
+- [ ] 日语/韩语字幕与释义正常
+- [ ] 新语言可通过配置扩展
+
+## System Architecture Layers
+
+- [ ] Layer 0（Immersion Runtime）正常
+- [ ] Layer 1（Cognitive Engines）正常
+- [ ] Layer 2（AI Agent System）正常
+- [ ] Layer 3（Content System）正常
+- [ ] Layer 3.5（World Simulation Layer）正常
+- [ ] Layer 4（Experience Layer）正常
+- [ ] Layer 4.5（Ambient Layer）正常
+- [ ] Layer 5（Guardrails）正常
+- [ ] 层间规则遵守
+
+## Technical Moats
+
+- [ ] Acquisition Memory Graph 网络效应可验证
+- [ ] State Machine + i+1 推荐闭环可验证
+- [ ] Immersion Runtime 沉浸数据可采集
+- [ ] Emotional State + Memory Graph 情绪模型可训练
+- [ ] Guardrails 防退化系统可验证
+- [ ] World + Companion 情感绑定可验证
+- [ ] Identity Transition 身份迁移可验证
+
+## Core Hierarchy 验证
+
+- [ ] Runtime > Feature：运行时优先级高于功能
+- [ ] State > Level：状态优先于等级
+- [ ] Input > Practice：输入优先于练习
+- [ ] Immersion > Engagement：沉浸优先于活跃度
+- [ ] Acquisition > Education：习得优先于教育
+- [ ] World > Content：世界优先于内容
+- [ ] Identity > Skill：身份优先于技能
+- [ ] Narrative > Interest：叙事优先于兴趣
+- [ ] Emotion > Repetition：情绪优先于重复
