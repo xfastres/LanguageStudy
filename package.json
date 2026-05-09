@@ -1,0 +1,18 @@
+{
+  "name": "@linguaflow/monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "LinguaFlow - 基于可理解性输入的沉浸式语言习得平台",
+  "scripts": {
+    "dev": "pnpm --filter @linguaflow/web dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@9.1.0"
+}
