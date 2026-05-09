@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common'
+import { Controller, Get, Post, Patch, Delete, Body, Param, Query } from '@nestjs/common'
 import { ContentService } from './content.service'
-import { CreateContentDto, FeedQueryDto, ComprehensionFeedbackDto } from './content.dto'
+import { CreateContentDto, FeedQueryDto, ComprehensionFeedbackDto, UpdateContentDto } from './content.dto'
 
 @Controller('content')
 export class ContentController {
@@ -35,6 +35,17 @@ export class ContentController {
   @Post()
   async create(@Body() dto: CreateContentDto) {
     return this.contentService.create(dto)
+  }
+
+  @Patch(':id')
+  async update(@Param('id') id: string, @Body() dto: UpdateContentDto) {
+    return this.contentService.update(id, dto)
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    await this.contentService.remove(id)
+    return { ok: true }
   }
 
   @Post(':id/feedback')

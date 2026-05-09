@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { ContentEntity } from './content.entity'
-import { CreateContentDto, FeedQueryDto } from './content.dto'
+import { CreateContentDto, FeedQueryDto, UpdateContentDto } from './content.dto'
 import { recommendNext, rankCandidates } from '@linguaflow/feature-space'
 import type { ContentFeatureVector, UserProfileVector } from '@linguaflow/feature-space'
 
@@ -57,6 +57,15 @@ export class ContentService {
       .map((id) => entityMap.get(id))
       .filter((e): e is ContentEntity => e !== undefined)
       .slice(0, limit)
+  }
+
+  async update(id: string, dto: UpdateContentDto): Promise<ContentEntity | null> {
+    await this.contentRepo.update(id, dto)
+    return this.contentRepo.findOne({ where: { id } })
+  }
+
+  async remove(id: string): Promise<void> {
+    await this.contentRepo.delete(id)
   }
 
   async submitFeedback(id: string, comprehension: number): Promise<void> {

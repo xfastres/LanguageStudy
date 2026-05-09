@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { SubtitleOverlay } from './SubtitleOverlay'
 import { useTelemetry } from '@/hooks/useTelemetry'
+import { useAdaptiveDifficulty } from '@/hooks/useAdaptiveDifficulty'
 
 interface VideoPlayerProps {
   videoUrl: string
@@ -38,6 +39,7 @@ export function VideoPlayer({
   const controlsTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const telemetry = useTelemetry()
+  const { shouldDecreaseDifficulty, shouldIncreaseDifficulty } = useAdaptiveDifficulty()
 
   useEffect(() => {
     if (playing && videoRef.current) {
@@ -168,6 +170,42 @@ export function VideoPlayer({
         visible={subtitlesVisible}
         onToggle={toggleSubtitles}
       />
+
+      <AnimatePresence>
+        {shouldDecreaseDifficulty && (
+          <motion.div
+            key="difficulty-down"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.4 }}
+            className="absolute top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 pointer-events-none"
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-blue-300">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+            <span className="text-[10px] font-medium text-blue-200 tracking-wide">SLowing down</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {shouldIncreaseDifficulty && (
+          <motion.div
+            key="difficulty-up"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.4 }}
+            className="absolute top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/20 backdrop-blur-sm border border-emerald-400/30 pointer-events-none"
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-emerald-300">
+              <polyline points="18 15 12 9 6 15" />
+            </svg>
+            <span className="text-[10px] font-medium text-emerald-200 tracking-wide">Leveling up</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {showControls && (

@@ -61,6 +61,52 @@ export class FeedQueryDto {
   limit?: number
 }
 
+export class UpdateContentDto {
+  @IsOptional()
+  @IsString()
+  title?: string
+
+  @IsOptional()
+  @IsString()
+  description?: string
+
+  @IsOptional()
+  @IsEnum(['en', 'ja', 'ko'])
+  language?: 'en' | 'ja' | 'ko'
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(2)
+  level?: number
+
+  @IsOptional()
+  @IsUrl()
+  videoUrl?: string
+
+  @IsOptional()
+  @IsUrl()
+  thumbnailUrl?: string
+
+  @IsOptional()
+  @IsUrl()
+  subtitleUrl?: string
+
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  durationSeconds?: number
+
+  @IsOptional()
+  @IsObject()
+  features?: Record<string, number>
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  tags?: string[]
+}
+
 export class ComprehensionFeedbackDto {
   @IsNumber()
   @Min(0)

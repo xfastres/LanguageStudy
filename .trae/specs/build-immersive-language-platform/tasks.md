@@ -41,15 +41,15 @@
   - [x] SubTask 3.4: 推荐服务骨架（集成 comprehension + feature-space，输出 recommendNext()）
   - [x] SubTask 3.5: Signal 接收 API（接收前端行为信号，写入 telemetry 事件流）
 
-- [ ] Task 4: 内容分级与种子内容
-  - [ ] SubTask 4.1: 内容管理后台基础版（内容上传 + AI 辅助分级标注）
-  - [ ] SubTask 4.2: 英语种子内容（50-100 条：强视觉、高频结构、微剧情、高情绪表达、高上下文可猜测性，Level 0-2）
+- [x] Task 4: 内容分级与种子内容
+  - [x] SubTask 4.1: 内容管理后台基础版（内容上传 + AI 辅助分级标注）
+  - [x] SubTask 4.2: 英语种子内容（50 条：强视觉、高频结构、微剧情、高情绪表达、高上下文可猜测性，Level 0-2）
 
-- [ ] Task 5: 闭环集成 — Runtime 驱动内容推荐
-  - [ ] SubTask 5.1: 前端 Signal Collection Layer 完整接入（10 信号全量采集）
-  - [ ] SubTask 5.2: 后端 Comprehension Inference 集成（Heuristic v1 实时推断理解率）
-  - [ ] SubTask 5.3: i+1 动态难度调节闭环（理解率 < 80% → 降难，> 90% → 升难）
-  - [ ] SubTask 5.4: Adaptive Difficulty Dimensions 集成（speech_speed / sentence_density / vocabulary_novelty / subtitle_exposure / scene_complexity / context_richness）
+- [x] Task 5: 闭环集成 — Runtime 驱动内容推荐
+  - [x] SubTask 5.1: 前端 Signal Collection Layer 完整接入（10 信号全量采集）
+  - [x] SubTask 5.2: 后端 Comprehension Inference 集成（Heuristic v1 实时推断理解率）
+  - [x] SubTask 5.3: i+1 动态难度调节闭环（理解率 < 80% → 降难，> 90% → 升难）
+  - [x] SubTask 5.4: Adaptive Difficulty Dimensions 集成（speech_speed / sentence_density / vocabulary_novelty / subtitle_exposure / scene_complexity / context_richness）
 
 **Phase 1 验证门：用户能否忘记自己在学语言，连续沉浸 45-90 分钟？不能通过则迭代 Phase 1，不前进。**
 

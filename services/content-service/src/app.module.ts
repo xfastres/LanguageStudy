@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ContentModule } from './content/content.module'
+import { SeedModule } from './seed/seed.module'
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ContentModule } from './content/content.module'
       synchronize: process.env.NODE_ENV !== 'production',
     }),
     ContentModule,
+    SeedModule,
   ],
 })
 export class AppModule {}

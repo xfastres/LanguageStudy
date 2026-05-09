@@ -32,15 +32,15 @@
 
 ### Task 4: 内容分级与种子内容
 
-- [ ] 内容管理后台基础版正常
-- [ ] 英语种子内容 50-100 条（强视觉、高频结构、微剧情、高情绪表达、高上下文可猜测性）
+- [x] 内容管理后台基础版正常
+- [x] 英语种子内容 50 条（强视觉、高频结构、微剧情、高情绪表达、高上下文可猜测性）
 
 ### Task 5: 闭环集成
 
-- [ ] 前端 Signal Collection Layer 完整接入（10 信号全量采集）
-- [ ] 后端 Comprehension Inference 集成正常
-- [ ] i+1 动态难度调节闭环正确（< 80% → 降难，> 90% → 升难）
-- [ ] Adaptive Difficulty Dimensions 集成正常
+- [x] 前端 Signal Collection Layer 完整接入（10 信号全量采集）
+- [x] 后端 Comprehension Inference 集成正常
+- [x] i+1 动态难度调节闭环正确（< 80% → 降难，> 90% → 升难）
+- [x] Adaptive Difficulty Dimensions 集成正常
 - [ ] **Phase 1 验证门：用户能否忘记自己在学语言，连续沉浸 45-90 分钟？**
 
 ## Non-Goals 守卫（贯穿所有 Phase）

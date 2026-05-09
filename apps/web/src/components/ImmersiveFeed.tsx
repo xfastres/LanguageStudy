@@ -6,26 +6,69 @@ import { VideoPlayer } from './VideoPlayer'
 import { useContentStore } from '@/store/content-store'
 import { useRuntime } from '@/hooks/useRuntime'
 import { useTelemetry } from '@/hooks/useTelemetry'
+import { useSignalCollector } from '@/hooks/useSignalCollector'
 import { initializeRuntime, destroyRuntime } from '@/lib/runtime'
+import { fetchContentFeed, adaptDifficulty } from '@/lib/api'
+import type { ContentItem } from '@/types/content'
 
 const SWIPE_THRESHOLD = 80
 
 export function ImmersiveFeed() {
-  const { contentList, currentIndex, goNext, goPrev, setCurrentIndex } = useContentStore()
+  const { contentList, currentIndex, goNext, goPrev, setCurrentIndex, isLoading, setLoading } = useContentStore()
   const [direction, setDirection] = useState(0)
   const [isSwiping, setIsSwiping] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const runtimeState = useRuntime()
   const telemetry = useTelemetry()
+  const { signalVector } = useSignalCollector()
 
   useEffect(() => {
     initializeRuntime()
+
+    fetchContentFeed()
+      .then((data: ContentItem[]) => {
+        if (Array.isArray(data) && data.length > 0) {
+          useContentStore.setState({ contentList: data })
+        }
+      })
+      .catch(() => {})
+
     return () => {
       destroyRuntime()
     }
   }, [])
 
   const currentItem = contentList[currentIndex]
+
+  const handleAdaptAndAdvance = useCallback(async (nextIndex: number) => {
+    if (!signalVector) {
+      setCurrentIndex(nextIndex)
+      return
+    }
+
+    try {
+      const result = await adaptDifficulty('default_user', {
+        ...signalVector,
+        immersionScore: runtimeState.immersionScore,
+        cognitiveLoad: runtimeState.cognitiveLoad,
+      })
+
+      if (result.nextContentId) {
+        const nextItem = contentList.find((c) => c.id === result.nextContentId)
+        if (nextItem) {
+          const nextIdx = contentList.indexOf(nextItem)
+          if (nextIdx >= 0) {
+            setCurrentIndex(nextIdx)
+            return
+          }
+        }
+      }
+
+      setCurrentIndex(nextIndex)
+    } catch {
+      setCurrentIndex(nextIndex)
+    }
+  }, [signalVector, runtimeState.immersionScore, runtimeState.cognitiveLoad, contentList, setCurrentIndex])
 
   const handleSwipeEnd = useCallback(
     (_: unknown, info: PanInfo) => {
@@ -37,7 +80,7 @@ export function ImmersiveFeed() {
         if (currentIndex < contentList.length - 1) {
           setDirection(1)
           telemetry.emitSkip(currentItem.id, 0, 0)
-          goNext()
+          handleAdaptAndAdvance(currentIndex + 1)
         }
       } else if (offset > SWIPE_THRESHOLD || velocity > 500) {
         if (currentIndex > 0) {
@@ -46,15 +89,15 @@ export function ImmersiveFeed() {
         }
       }
     },
-    [currentIndex, contentList.length, currentItem, goNext, goPrev, telemetry],
+    [currentIndex, contentList.length, currentItem, goPrev, telemetry, handleAdaptAndAdvance],
   )
 
   const handleVideoEnded = useCallback(() => {
     if (currentIndex < contentList.length - 1) {
       setDirection(1)
-      goNext()
+      handleAdaptAndAdvance(currentIndex + 1)
     }
-  }, [currentIndex, contentList.length, goNext])
+  }, [currentIndex, contentList.length, handleAdaptAndAdvance])
 
   const handleTimeUpdate = useCallback((_time: number) => {}, [])
 
