@@ -2,6 +2,7 @@
   "name": "@linguaflow/recommendation-service",
   "version": "0.1.0",
   "private": true,
+  "type": "commonjs",
   "scripts": {
     "start": "nest start",
     "start:dev": "nest start --watch",

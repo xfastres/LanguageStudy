@@ -5,14 +5,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
-    "paths": {
-      "@linguaflow/feature-space": ["../feature-space/src"],
-      "@linguaflow/comprehension": ["../comprehension/src"],
-      "@linguaflow/runtime-core": ["../runtime-core/src"],
-      "@linguaflow/telemetry": ["../telemetry/src"],
-      "@linguaflow/shared": ["../shared/src"],
-      "@linguaflow/logger": ["../logger/src"]
-    }
+    "module": "CommonJS",
+    "moduleResolution": "node"
   },
   "include": ["src"]
 }

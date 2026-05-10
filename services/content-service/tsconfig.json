@@ -5,10 +5,12 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "paths": {
-      "@linguaflow/feature-space": ["../feature-space/src"],
-      "@linguaflow/shared": ["../shared/src"],
-      "@linguaflow/logger": ["../logger/src"]
+      "@linguaflow/feature-space": ["../../packages/feature-space/src"],
+      "@linguaflow/shared": ["../../packages/shared/src"],
+      "@linguaflow/logger": ["../../packages/logger/src"]
     }
   },
   "include": ["src"]

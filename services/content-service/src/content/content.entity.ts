@@ -30,7 +30,7 @@ export class ContentEntity {
   @Column()
   durationSeconds: number
 
-  @Column({ type: 'jsonb' })
+  @Column({ type: 'json' })
   features: Record<string, number>
 
   @Column({ type: 'simple-array', nullable: true })

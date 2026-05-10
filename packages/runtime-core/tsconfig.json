@@ -2,10 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "../..",
-    "paths": {
-      "@linguaflow/telemetry": ["../telemetry/src"]
-    }
+    "rootDir": "./src"
   },
   "include": ["src"]
 }

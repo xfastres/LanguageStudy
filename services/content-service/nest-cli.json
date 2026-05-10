@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "outDir": "./dist"
+  }
+}

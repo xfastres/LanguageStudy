@@ -12,18 +12,7 @@
     "isolatedModules": true,
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true,
-    "paths": {
-      "@linguaflow/shared": ["./packages/shared/src"],
-      "@linguaflow/database": ["./packages/database/src"],
-      "@linguaflow/logger": ["./packages/logger/src"],
-      "@linguaflow/telemetry": ["./packages/telemetry/src"],
-      "@linguaflow/runtime-core": ["./packages/runtime-core/src"],
-      "@linguaflow/feature-space": ["./packages/feature-space/src"],
-      "@linguaflow/comprehension": ["./packages/comprehension/src"],
-      "@linguaflow/evaluation": ["./packages/evaluation/src"],
-      "@linguaflow/simulation": ["./packages/simulation/src"]
-    }
+    "sourceMap": true
   },
   "exclude": ["node_modules", "dist", ".next"]
 }
