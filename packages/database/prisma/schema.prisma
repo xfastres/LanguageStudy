@@ -15,3 +15,19 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Content {
+  id               String   @id @default(cuid())
+  title            String
+  description      String?
+  language         String   @default("en")
+  level            Int      @default(0)
+  videoUrl         String
+  thumbnailUrl     String?
+  subtitleUrl      String?
+  durationSeconds  Int      @default(0)
+  features         Json
+  tags             String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
